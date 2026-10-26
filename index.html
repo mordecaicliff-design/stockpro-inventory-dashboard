@@ -3,436 +3,134 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Responsive Design Studio</title>
-    <style>
-      :root {
-        --bg: #0b1020;
-        --panel: #121b2d;
-        --panel-soft: #1a2741;
-        --primary: #7c9cff;
-        --primary-strong: #5d7ef5;
-        --accent: #5eead4;
-        --text: #edf2ff;
-        --muted: #b6c2d9;
-        --border: rgba(255, 255, 255, 0.08);
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: linear-gradient(180deg, #081120 0%, #0f172a 100%);
-        color: var(--text);
-        line-height: 1.6;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .container {
-        width: min(1100px, calc(100% - 32px));
-        margin: 0 auto;
-      }
-
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        backdrop-filter: blur(10px);
-        background: rgba(11, 16, 32, 0.72);
-        border-bottom: 1px solid var(--border);
-      }
-
-      .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 72px;
-      }
-
-      .brand {
-        font-size: 1.2rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 22px;
-        align-items: center;
-        color: var(--muted);
-      }
-
-      .nav-links a:hover {
-        color: var(--text);
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 0.9rem 1.4rem;
-        border-radius: 999px;
-        border: none;
-        font-weight: 700;
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 20px rgba(124, 156, 255, 0.25);
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-        color: white;
-      }
-
-      .btn-secondary {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--border);
-        color: var(--text);
-      }
-
-      .hero {
-        padding: 90px 0 70px;
-      }
-
-      .hero-inner {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        align-items: center;
-        gap: 40px;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        padding: 0.4rem 0.8rem;
-        border: 1px solid rgba(94, 234, 212, 0.35);
-        background: rgba(94, 234, 212, 0.08);
-        color: var(--accent);
-        border-radius: 999px;
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        font-size: clamp(2.8rem, 4vw, 5rem);
-        line-height: 1.02;
-        margin: 20px 0 18px;
-      }
-
-      .lead {
-        max-width: 600px;
-        color: var(--muted);
-        font-size: 1.08rem;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-        margin-top: 28px;
-      }
-
-      .hero-stats {
-        display: flex;
-        gap: 24px;
-        flex-wrap: wrap;
-        margin-top: 32px;
-      }
-
-      .stat {
-        min-width: 120px;
-      }
-
-      .stat strong {
-        display: block;
-        font-size: 1.7rem;
-      }
-
-      .stat span {
-        color: var(--muted);
-      }
-
-      .card {
-        background: linear-gradient(180deg, rgba(18, 27, 45, 0.95), rgba(18, 27, 45, 0.8));
-        border: 1px solid var(--border);
-        border-radius: 26px;
-        box-shadow: 0 20px 60px rgba(2, 6, 23, 0.5);
-      }
-
-      .dashboard {
-        position: relative;
-        padding: 20px;
-      }
-
-      .dashboard-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 18px;
-      }
-
-      .dots {
-        display: flex;
-        gap: 8px;
-      }
-
-      .dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .dot:nth-child(1) { background: #f87171; }
-      .dot:nth-child(2) { background: #fbbf24; }
-      .dot:nth-child(3) { background: #34d399; }
-
-      .mini-chart {
-        height: 220px;
-        background: linear-gradient(180deg, rgba(124, 156, 255, 0.18), rgba(94, 234, 212, 0.06));
-        border-radius: 18px;
-        border: 1px solid rgba(124, 156, 255, 0.2);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .mini-chart svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-      }
-
-      .panel-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 24px;
-        padding: 20px 0 80px;
-      }
-
-      .info-card {
-        padding: 28px 22px;
-      }
-
-      .info-card h3 {
-        margin: 0 0 12px;
-        font-size: 1.2rem;
-      }
-
-      .info-card p {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      .feature-icon {
-        width: 52px;
-        height: 52px;
-        border-radius: 16px;
-        display: grid;
-        place-items: center;
-        margin-bottom: 18px;
-        background: linear-gradient(135deg, rgba(124, 156, 255, 0.18), rgba(94, 234, 212, 0.18));
-        color: var(--accent);
-        font-size: 1.4rem;
-        font-weight: 700;
-      }
-
-      .cta {
-        padding: 22px 0 90px;
-      }
-
-      .cta-box {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 30px 32px;
-        background: linear-gradient(135deg, rgba(124, 156, 255, 0.14), rgba(94, 234, 212, 0.08));
-        border: 1px solid rgba(124, 156, 255, 0.22);
-        border-radius: 24px;
-      }
-
-      .cta-box h2 {
-        margin: 0 0 8px;
-        font-size: clamp(1.8rem, 2vw, 2.8rem);
-      }
-
-      .cta-box p {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      footer {
-        border-top: 1px solid var(--border);
-        padding: 28px 0 50px;
-        color: var(--muted);
-      }
-
-      .footer-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 14px;
-      }
-
-      @media (max-width: 840px) {
-        .hero-inner,
-        .panel-grid,
-        .cta-box {
-          grid-template-columns: 1fr;
-          display: grid;
-        }
-
-        .nav-links {
-          display: none;
-        }
-
-        .cta-box {
-          text-align: center;
-        }
-      }
-
-      @media (max-width: 540px) {
-        .hero {
-          padding-top: 64px;
-        }
-
-        h1 {
-          font-size: 2.5rem;
-        }
-
-        .btn {
-          width: 100%;
-          text-align: center;
-        }
-
-        .hero-actions {
-          flex-direction: column;
-        }
-
-        .footer-row {
-          flex-direction: column;
-          text-align: center;
-        }
-      }
-    </style>
+    <title>StockPro Inventory</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <header>
-      <div class="container nav">
-        <div class="brand">Nova</div>
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="#features">Features</a>
-          <a href="#about">About</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#contact">Contact</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Sidebar navigation">
+        <div class="brand">
+          <div class="brand-mark">S</div>
+          <div>
+            <h1>StockPro</h1>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a href="#" class="nav-item active">Dashboard</a>
+          <a href="#" class="nav-item">Products</a>
+          <a href="#" class="nav-item">Orders</a>
+          <a href="#" class="nav-item">Suppliers</a>
+          <a href="#" class="nav-item">Reports</a>
+          <a href="#" class="nav-item">Settings</a>
         </nav>
-        <a class="btn btn-secondary" href="#contact">Book a call</a>
+      </aside>
+
+      <div class="main-panel">
+        <header class="topbar">
+          <label class="search" aria-label="Search">
+            <span>Search:</span>
+            <input type="search" placeholder="Search inventory" />
+          </label>
+
+          <div class="user-menu" aria-label="User menu">
+            <span class="welcome-text">Welcome, Amina</span>
+            <div class="avatar" aria-label="User avatar">A</div>
+          </div>
+        </header>
+
+        <main class="content">
+          <section class="page-head">
+            <div>
+              <p class="eyebrow">Dashboard</p>
+              <h2>Summary</h2>
+            </div>
+          </section>
+
+          <section class="stats-grid" aria-label="Inventory summary">
+            <article class="stat-card accent-blue">
+              <span class="stat-label">Total products</span>
+              <strong class="stat-value">15</strong>
+            </article>
+            <article class="stat-card accent-amber">
+              <span class="stat-label">Low stock</span>
+              <strong class="stat-value">8</strong>
+            </article>
+            <article class="stat-card accent-green">
+              <span class="stat-label">Orders today</span>
+              <strong class="stat-value">23</strong>
+            </article>
+            <article class="stat-card accent-purple">
+              <span class="stat-label">Inventory value</span>
+              <strong class="stat-value">KES 998,820</strong>
+            </article>
+          </section>
+
+          <section class="panel-grid">
+            <div class="panel inventory-panel">
+              <div class="panel-header">
+                <h3>Inventory</h3>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>SKU</th>
+                      <th>Product</th>
+                      <th>Qty</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>EL-001</td>
+                      <td>USB-C Cable 1m</td>
+                      <td>120</td>
+                    </tr>
+                    <tr>
+                      <td>EL-003</td>
+                      <td>Bluetooth Speaker</td>
+                      <td>8</td>
+                    </tr>
+                    <tr>
+                      <td>ST-004</td>
+                      <td>Notebook A5</td>
+                      <td>6</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <aside class="panel form-panel" aria-label="Add product form">
+              <div class="panel-header">
+                <h3>Add product</h3>
+              </div>
+
+              <form class="product-form">
+                <label>
+                  <span>Name</span>
+                  <input type="text" placeholder="Product name" />
+                </label>
+
+                <label>
+                  <span>SKU</span>
+                  <input type="text" placeholder="SKU" />
+                </label>
+
+                <label>
+                  <span>Quantity</span>
+                  <input type="number" placeholder="Quantity" />
+                </label>
+
+                <button type="submit">Save product</button>
+              </form>
+            </aside>
+          </section>
+        </main>
       </div>
-    </header>
+    </div>
 
-    <main>
-      <section class="hero">
-        <div class="container hero-inner">
-          <div>
-            <span class="eyebrow">Built for growth</span>
-            <h1>Design systems that scale with your team.</h1>
-            <p class="lead">
-              We create fast, focused digital experiences for brands that want to launch better,
-              grow smarter, and stay memorable.
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#features">Get started</a>
-              <a class="btn btn-secondary" href="#about">See our work</a>
-            </div>
-            <div class="hero-stats">
-              <div class="stat">
-                <strong>4.9/5</strong>
-                <span>Client rating</span>
-              </div>
-              <div class="stat">
-                <strong>130+</strong>
-                <span>Projects shipped</span>
-              </div>
-              <div class="stat">
-                <strong>24/7</strong>
-                <span>Support</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card dashboard" aria-label="Analytics dashboard preview">
-            <div class="dashboard-top">
-              <div class="dots" aria-hidden="true">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-              </div>
-              <span style="color: var(--muted); font-size: 0.8rem;">Overview</span>
-            </div>
-            <div class="mini-chart">
-              <svg viewBox="0 0 300 220" preserveAspectRatio="none" aria-label="Growth chart">
-                <defs>
-                  <linearGradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#7c9cff" stop-opacity="0.45" />
-                    <stop offset="100%" stop-color="#7c9cff" stop-opacity="0" />
-                  </linearGradient>
-                </defs>
-                <path d="M0,180 C40,170, 75,150, 120,138 S190,94, 220,110 S260,70, 300,40 L300,220 L0,220 Z" fill="url(#areaGradient)"></path>
-                <path d="M0,180 C40,170, 75,150, 120,138 S190,94, 220,110 S260,70, 300,40" fill="none" stroke="#7c9cff" stroke-width="4" stroke-linecap="round"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="features" class="container panel-grid">
-        <article class="card info-card">
-          <div class="feature-icon">A</div>
-          <h3>Strategy-first design</h3>
-          <p>We turn business goals into clean, conversion-focused digital experiences.</p>
-        </article>
-        <article class="card info-card">
-          <div class="feature-icon">S</div>
-          <h3>Scalable systems</h3>
-          <p>Reusable design language that keeps your brand consistent across every touchpoint.</p>
-        </article>
-        <article class="card info-card">
-          <div class="feature-icon">D</div>
-          <h3>Data-backed decisions</h3>
-          <p>Insights, testing, and analytics drive each iteration so growth stays measurable.</p>
-        </article>
-      </section>
-
-      <section id="about" class="container cta">
-        <div class="cta-box">
-          <div>
-            <h2>Ready to build something better?</h2>
-            <p>From early strategy to final launch, we help teams move faster and look sharper.</p>
-          </div>
-          <a class="btn btn-primary" href="#contact">Start your project</a>
-        </div>
-      </section>
-    </main>
-
-    <footer id="contact">
-      <div class="container footer-row">
-        <div>© 2026 Nova Studio</div>
-        <div>hello@novastudio.com</div>
-      </div>
-    </footer>
+    <footer class="footer">StockPro 2026</footer>
   </body>
 </html>
